@@ -1,13 +1,13 @@
 {
-  "name": "create-test-devpo-app",
-  "version": "1.3.0",
+  "name": "create-dev-portfolio",
+  "version": "1.4.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "create-test-devpo-app": "./bin/generate-app.js"
+    "create-dev-portfolio": "./bin/generate-app.js"
   },
   "keywords": [
     "portfolio",
