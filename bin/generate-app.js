@@ -26,7 +26,8 @@ async function main() {
   try {
     console.log("Downloading files...");
     execSync(`git clone --depth 1 ${GIT_REPO} ${projectPath}`); // 우리의 보일러 플레이트를 clone!
-    execSync(`git submodules update`) // 서브모듈 install!
+    console.log("Downloading submodules...");
+    execSync(`git submodules update`); // 서브모듈 install!
 
     if (projectName !== ".") {
       process.chdir(`${projectPath}`); // cd입니다 clone을 마친 후 projectPath로 진입
