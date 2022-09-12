@@ -25,16 +25,17 @@ if (projectName !== ".") {
 async function main() {
   try {
     console.log("Downloading files...");
-    execSync(`git clone --depth 1 ${GIT_REPO} ${projectPath}`); // 우리의 보일러 플레이트를 clone!
-    console.log("Downloading submodules...");
-    execSync(`git submodule update --init --remote --merge`); // 서브모듈 install!
+    execSync(`git clone --recursive --depth 1 ${GIT_REPO} ${projectPath}`); // 우리의 보일러 플레이트를 clone!
 
     if (projectName !== ".") {
       process.chdir(`${projectPath}`); // cd입니다 clone을 마친 후 projectPath로 진입
     }
 
-    console.log("Installing dependencies...");
-    execSync("npm run bootstrap"); // package.json에 있는 의존성 설치
+    console.log("Downloading submodules...");
+    execSync(`git submodule update --init --remote --merge`); // 서브모듈 install!
+
+    // console.log("Installing dependencies...");
+    // execSync("npm run bootstrap"); // package.json에 있는 의존성 설치
 
     console.log("Removing useless files");
     execSync("npx rimraf ./.git"); // 이제 보일러플레이트 git과 관련된 내용 제거
