@@ -34,8 +34,8 @@ async function main() {
     console.log("Downloading submodules...");
     execSync(`git submodule update --init --remote --merge`); // 서브모듈 install!
 
-    // console.log("Installing dependencies...");
-    // execSync("npm run bootstrap"); // package.json에 있는 의존성 설치
+    console.log("Installing dependencies...");
+    execSync("npm run bootstrap"); // package.json에 있는 의존성 설치
 
     console.log("Removing useless files");
     execSync("npx rimraf ./.git"); // 이제 보일러플레이트 git과 관련된 내용 제거
