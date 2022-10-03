@@ -38,10 +38,9 @@ async function main() {
     execSync("npm run bootstrap"); // package.json에 있는 의존성 설치
 
     // 이제 보일러플레이트 git과 관련된 내용 제거
-    console.log("Removing useless files");
-    execSync("npx rimraf ./.git"); 
-    process.chdir(`${process.cwd()}/client`);
-    execSync("rm -rf .github")
+    console.log("Removing useless files...");
+    execSync("npx rimraf ./.git");  
+    execSync("npx rimraf ./client/.github");
 
     console.log("The installation is done, this is ready to use!\n");
     console.log("Start dev-portfilio by typing 'npm run start:all' in your terminal!");
