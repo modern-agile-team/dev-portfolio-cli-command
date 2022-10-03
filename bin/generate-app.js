@@ -24,7 +24,7 @@ if (projectName !== ".") {
 
 async function main() {
   try {
-    console.log("Downloading files...");
+    console.log("Cloning dev-portfolio...");
     execSync(`git clone --recursive --depth 1 ${GIT_REPO} ${projectPath}`); // 우리의 보일러 플레이트를 clone!
 
     if (projectName !== ".") {
