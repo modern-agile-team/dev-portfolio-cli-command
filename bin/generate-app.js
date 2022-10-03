@@ -39,9 +39,9 @@ async function main() {
 
     // 이제 보일러플레이트 git과 관련된 내용 제거
     console.log("Removing useless files");
-    execSync("npx rimraf ./.git");
-    process.chdir(`client`);
-    execSync("rm -rf .github");
+    execSync("npx rimraf ./.git"); 
+    process.chdir(`${process.cwd()}/client`);
+    execSync("rm -rf .github")
 
     console.log("The installation is done, this is ready to use!\n");
     console.log("Start dev-portfilio by typing 'npm run start:all' in your terminal!");
