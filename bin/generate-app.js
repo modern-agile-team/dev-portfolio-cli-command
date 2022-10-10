@@ -58,14 +58,14 @@ async function main() {
     execSync("npx rimraf ./.git");
     execSync("npx rimraf ./client/.github");
 
-    console.log("The installation is done, this is ready to use!\n");
-    console.log("Start dev-portfilio by typing 'npm run start:all' in your terminal!\n");
-
     if (requiredDependencies.length > 0) {
       console.log("Required dependencies below\n");
       for (const dependency of requiredDependencies) {
         console.log(`${dependency} is required\n`);
       }
+    } else {
+      console.log("The installation is done, this is ready to use!\n");
+      console.log("Start dev-portfilio by typing 'npm run start:all' in your terminal!\n");
     }
   } catch (error) {
     console.log(error);
