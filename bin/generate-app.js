@@ -38,6 +38,7 @@ async function main() {
     checkIsDependencyExist("node");
     checkIsDependencyExist("npm");
     checkIsDependencyExist("bash");
+    checkIsDependencyExist("docker-compose");
 
     console.log("Cloning dev-portfolio...");
     execSync(`git clone --recursive --depth 1 ${GIT_REPO} ${projectPath}`); // 우리의 보일러 플레이트를 clone!
