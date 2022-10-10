@@ -22,8 +22,23 @@ if (projectName !== ".") {
   }
 }
 
+const requiredDependencies = [];
+
+const checkIsDependencyExist = (system) => {
+  try {
+    execSync(`which ${system}`).toString();
+  } catch (err) {
+    requiredDependencies.push(system);
+  }
+};
+
 async function main() {
   try {
+    checkIsDependencyExist("docker");
+    checkIsDependencyExist("node");
+    checkIsDependencyExist("npm");
+    checkIsDependencyExist("bash");
+
     console.log("Cloning dev-portfolio...");
     execSync(`git clone --recursive --depth 1 ${GIT_REPO} ${projectPath}`); // 우리의 보일러 플레이트를 clone!
 
@@ -39,11 +54,18 @@ async function main() {
 
     // 이제 보일러플레이트 git과 관련된 내용 제거
     console.log("Removing useless files...");
-    execSync("npx rimraf ./.git");  
+    execSync("npx rimraf ./.git");
     execSync("npx rimraf ./client/.github");
 
     console.log("The installation is done, this is ready to use!\n");
-    console.log("Start dev-portfilio by typing 'npm run start:all' in your terminal!");
+    console.log("Start dev-portfilio by typing 'npm run start:all' in your terminal!\n");
+
+    if (requiredDependencies.length > 0) {
+      console.log("Required dependencies below\n");
+      for (const dependency of requiredDependencies) {
+        console.log(`${dependency} is required\n`);
+      }
+    }
   } catch (error) {
     console.log(error);
   }
