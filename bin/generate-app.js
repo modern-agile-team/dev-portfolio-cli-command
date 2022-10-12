@@ -3,32 +3,13 @@
 import { execSync } from "child_process";
 import path from "path";
 import fs from "fs";
-import chalk from "chalk";
+import { logger } from "../utils/index.js";
 
 const projectName = process.argv[2] || "dev-portfolio";
 const currentPath = process.cwd();
 const projectPath = path.join(currentPath, projectName);
 const GIT_REPO = "https://github.com/modern-agile-team/create-dev-portfolio.git";
 
-const logger = {
-  /**
-   *
-   * @param {*} color bgGreenBright | bgYellowBright | bgBlueBright | yellowBright
-   * @param {*} message text
-   */
-  log(color, message) {
-    console.log(chalk[color](message));
-  },
-  warn(message) {
-    console.log(chalk.bold.yellow("[WARN] ") + message);
-  },
-  error(message) {
-    console.error(chalk.bold.red("[ERROR] ") + chalk.redBright(message));
-  },
-  tagging(tag, message) {
-    console.info(chalk.bold.gray(`[${tag.toUpperCase()}] `) + chalk.cyanBright(message));
-  },
-};
 if (projectName !== ".") {
   try {
     fs.mkdirSync(projectPath);
