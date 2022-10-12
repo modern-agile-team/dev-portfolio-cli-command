@@ -1,6 +1,6 @@
 {
   "name": "create-dev-portfolio",
-  "version": "v2.1.6",
+  "version": "v2.2.0",
   "description": "",
   "main": "index.js",
   "type": "module",
