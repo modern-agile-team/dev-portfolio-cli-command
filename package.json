@@ -3,6 +3,7 @@
   "version": "v2.1.6",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,5 +20,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/modern-agile-team/dev-portfolio-app.git"
+  },
+  "dependencies": {
+    "chalk": "^5.1.1"
   }
 }
