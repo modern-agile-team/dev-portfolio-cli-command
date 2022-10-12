@@ -1,25 +1,42 @@
 #! /usr/bin/env node
-const { execSync } = require("child_process");
-const path = require("path");
-const fs = require("fs");
+
+import { execSync } from "child_process";
+import path from "path";
+import fs from "fs";
+import chalk from "chalk";
 
 const projectName = process.argv[2] || "dev-portfolio";
 const currentPath = process.cwd();
 const projectPath = path.join(currentPath, projectName);
-const GIT_REPO =
-  "https://github.com/modern-agile-team/create-dev-portfolio.git";
+const GIT_REPO = "https://github.com/modern-agile-team/create-dev-portfolio.git";
 
+const logger = {
+  /**
+   *
+   * @param {*} color bgGreenBright | bgYellowBright | bgBlueBright
+   * @param {*} message text
+   */
+  log(color, message) {
+    console.log(chalk[color](message));
+  },
+  warn(message) {
+    console.log(chalk.bold.yellow("[WARN] ") + message);
+  },
+  error(message) {
+    console.error(chalk.bold.red("[ERROR] ") + chalk.redBright(message));
+  },
+  tagging(tag, message) {
+    console.info(chalk.bold.gray(`[${tag.toUpperCase()}] `) + chalk.cyanBright(message));
+  },
+};
 if (projectName !== ".") {
   try {
     fs.mkdirSync(projectPath);
   } catch (err) {
     if (err.code === "EEXIST") {
-      console.log(projectName);
-      console.log(
-        `The file ${projectName} already exist in the current directory, please give it another name.`
-      );
+      logger.error(`The file ${projectName} already exist in the current directory, please give it another name.`);
     } else {
-      console.log(err);
+      logger.error(err);
     }
     process.exit(1);
   }
@@ -43,37 +60,34 @@ async function main() {
     checkIsDependencyExist("npm");
     checkIsDependencyExist("bash");
 
-    console.log("Cloning dev-portfolio...");
+    logger.tagging("info", "Cloning dev-portfolio...");
     execSync(`git clone --depth 1 ${GIT_REPO} ${projectPath}`); // 우리의 보일러 플레이트를 clone!
 
     if (projectName !== ".") {
       process.chdir(`${projectPath}`); // cd입니다 clone을 마친 후 projectPath로 진입
     }
 
-    console.log("Installing dependencies...");
+    logger.tagging("info", "Installing dependencies...");
     execSync("npm run bootstrap"); // package.json에 있는 의존성 설치
 
     // 이제 보일러플레이트 git과 관련된 내용 제거
-    console.log("Removing useless files...");
-    execSync("npm install -g glob"); // 윈도우에서 npx rimraf를 하려면 glob 필요.
+    logger.tagging("info", "Removing useless files...");
     execSync("npx rimraf ./.git");
     execSync("npx rimraf ./client/.github");
 
     if (requiredDependencies.length > 0) {
-      console.log("Required dependencies below\n");
+      logger.tagging("required", "Required dependencies below\n");
       for (const dependency of requiredDependencies) {
-        console.log(`${dependency} is required!`);
+        logger.warn(`${dependency} is required\n`);
       }
     } else {
-      console.log("Installation is done, this is ready to use.\n");
-      console.log(
-        "Start dev-portfilio by typing the following command in your terminal!\n"
-      );
-      console.log("$ cd dev-portfolio or cd YOUR_APP_NAME");
-      console.log("$ npm run start:all\n");
+      logger.log("bgGreenBright", "The installation is done, this is ready to use!\n");
+      logger.log("bgGreenBright", "Start dev-portfilio by typing the following command in your terminal!\n");
+      logger.log("bgYellowBright", "$ cd dev-portfolio or cd YOUR_APP_NAME");
+      logger.log("bgYellowBright", "$ npm run start:all\n");
     }
   } catch (error) {
-    console.log(error);
+    logger.error(error);
   }
 }
 
