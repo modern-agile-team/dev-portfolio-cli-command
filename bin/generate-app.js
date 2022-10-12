@@ -13,7 +13,7 @@ const GIT_REPO = "https://github.com/modern-agile-team/create-dev-portfolio.git"
 const logger = {
   /**
    *
-   * @param {*} color bgGreenBright | bgYellowBright | bgBlueBright
+   * @param {*} color bgGreenBright | bgYellowBright | bgBlueBright | yellowBright
    * @param {*} message text
    */
   log(color, message) {
@@ -83,8 +83,8 @@ async function main() {
     } else {
       logger.log("bgGreenBright", "The installation is done, this is ready to use!\n");
       logger.log("bgGreenBright", "Start dev-portfilio by typing the following command in your terminal!\n");
-      logger.log("bgYellowBright", "$ cd dev-portfolio or cd YOUR_APP_NAME");
-      logger.log("bgYellowBright", "$ npm run start:all\n");
+      logger.log("yellowBright", "$ cd dev-portfolio or cd YOUR_APP_NAME");
+      logger.log("yellowBright", "$ npm run start:all\n");
     }
   } catch (error) {
     logger.error(error);
