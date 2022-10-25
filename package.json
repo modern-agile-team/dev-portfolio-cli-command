@@ -1,8 +1,12 @@
 {
   "name": "create-dev-portfolio",
-  "version": "v2.1.6",
+  "version": "v2.2.1",
   "description": "",
   "main": "index.js",
+  "type": "module",
+  "exports": {
+    "./utils/*": "./utils/*.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,9 +19,12 @@
     "react"
   ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/modern-agile-team/dev-portfolio-app.git"
+  },
+  "dependencies": {
+    "chalk": "^5.1.1"
   }
 }
